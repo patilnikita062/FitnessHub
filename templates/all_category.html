@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'main' %}
+<!--main start-->
+<style>
+    body {
+            background-image: url("{% static "asset/images/cat_back.jpg" %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+        }
+    .icon-25{
+        font-size:25px;
+    }
+    .bi-caret-right-square:hover{
+        cursor: pointer; 
+    }
+</style>
+
+    <div class="container mt-5"> <!--main div start-->
+        <br>
+        <div class="row">
+            
+            <i class="bi bi-caret-right-square icon-25" id="icon"></i>
+            
+
+            <div class="col-md-4 mt-2 text-link visible-category" >
+                <h5 class="fw-semibold">Filter by category</h5>
+                <hr>
+                <p><a href="/allcategory" class="anchor "><img src="{% static "asset/images/all_cat.png" %}" class="cat_icon" >All</a></p>
+                <p><a href="/catfilter/1" class="anchor "><img src="{% static "asset/images/dairy_cat.png" %}" class="cat_icon">Dairy</a></p>
+                <p><a href="/catfilter/2" class="anchor "><img src="{% static "asset/images/fruit_cat.png" %}" class="cat_icon">Fresh Fruits</a></p>
+                <p><a href="/catfilter/3" class="anchor "><img src="{% static "asset/images/veg_cat.png" %}" class="cat_icon">Fresh Vegetables</a></p>
+                <p><a href="/catfilter/4" class="anchor "><img src="{% static "asset/images/rice_cat.png" %}" class="cat_icon">Pasta, rice & cereals</a></p>
+                <p><a href="/catfilter/5" class="anchor "><img src="{% static "asset/images/meat_cat.png" %}" class="cat_icon">Meat alternatives</a></p>
+                <p><a href="/catfilter/6" class="anchor "><img src="{% static "asset/images/can_cat.png" %}" class="cat_icon">Cans & jars</a></p>
+                <p><a href="/catfilter/7" class="anchor "><img src="{% static "asset/images/bread_cat.png" %}" class="cat_icon">Bread & baked goods</a></p>
+                <p><a href="/catfilter/8" class="anchor "><img src="{% static "asset/images/frozen_cat.png" %}" class="cat_icon">Frozen foods</a></p>
+                <p><a href="/catfilter/9" class="anchor "><img src="{% static "asset/images/Sauces_cat.png" %}" class="cat_icon">Sauces & condiments</a></p>
+                <p><a href="/catfilter/10" class="anchor "><img src="{% static "asset/images/nuts_cat.png" %}" class="cat_icon">Nuts & snacks</a></p>
+                <p><a href="/catfilter/11" class="anchor "><img src="{% static "asset/images/beverages_cat.png" %}" class="cat_icon">Beverages</a></p>
+                <p><a href="/catfilter/12" class="anchor "><img src="{% static "asset/images/Herbs_spices_cat.png" %}" class="cat_icon">Herbs & spices</a></p>
+                
+
+                <h5 class="fw-semibold">Filter by Price Range</h5>
+                <hr>
+                <form action="/range" >
+                    <div class="mb-3">
+                        <label for="minvalue"   class="form-label">Min Value</label>
+                        <input type="number" name="min" class="form-control" id="minvalue" placeholder="min value">
+                    </div><!--min value end-->
+
+                    <div class="mb-3">
+                        <label for="maxvalue" class="form-label">Max Value</label>
+                        <input type="number" name="max" class="form-control" id="maxvalue" placeholder="max value">
+                    </div><!--max value end-->
+
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn-secondary" value="submit">
+                    </div><!--btn end-->
+                </form>
+                <h5 class="fw-semibold">Sort by Price</h5>
+                <hr>
+                <p><a href="/sort/0" class="anchor">Low to High</a></p>
+                <p><a href="/sort/1" class="anchor">High to Low </a></p>
+
+                <h5 class="fw-semibold">Filter By Brand</h5>
+                <hr>
+                <p><a href="/allcategory" class='anchor'>All</a></p>
+          <p><a href="/brand/bb royal" class="anchor">by bb royal</a></p>
+          <p><a href="/brand/fresho" class="anchor">by fresho</a></p>
+          <p><a href="/brand/modern" class="anchor">By modern</a></p>
+          <p><a href="/brand/amul" class="anchor">By amul</a></p>
+          <p><a href="/brand/row" class="anchor">By row</a></p>
+          <p><a href="/brand/amul" class="anchor">By amul</a></p>
+          <p><a href="/brand/myfitness" class="anchor">By myfitness</a></p>
+          <p><a href="/brand/Soyfit" class="anchor">By Soyfit</a></p>
+          
+            </div> <!--filter col end-->
+
+            <div class="col-md-8 mt-5 mx-auto">
+
+                <div class="row gy-3">
+                    {% for x in products %}
+                    <div class="col-3 text-center">
+                        <div class="card" style="width: 100%;">
+                            <img src="{{x.pimage.url}}" width="100%" height= '200px'  class="card-img-top" alt="">
+                            <div class="card-body shad">
+                                <h5 class="card-title fw-semibold mytext">{{x.name}}</h5>
+                                <p class="card-text mytext">Rs.{{x.price}}</p>
+                                {% comment %} <p class="card-text mytext">{{x.cat}}</p> {% endcomment %}
+                                {% if x.cat == 1 %}
+                               <p class="card-text">Dairy</p>
+                               {% elif x.cat == 2 %}
+                               <p class="card-text">Fruits</p>
+                               {% elif x.cat == 3 %}
+                               <p class="card-text">Vegetables</p>
+                               {% elif x.cat == 4 %}
+                               <p class="card-text">Pasta, rice & cereals</p>
+                               {% elif x.cat == 5 %}
+                               <p class="card-text">Meat alternatives</p>
+                               {% elif x.cat == 6 %}
+                               <p class="card-text">Cans & jars</p>
+                               {% elif x.cat == 7 %}
+                               <p class="card-text">Bread & baked goods</p>
+                               {% elif x.cat == 8 %}
+                               <p class="card-text">Frozen foods</p>
+                               {% elif x.cat == 9 %}
+                               <p class="card-text">Sauces & condiments</p>
+                               {% elif x.cat == 10 %}
+                               <p class="card-text">Nuts & snacks</p>
+                               {% elif x.cat == 11 %}
+                               <p class="card-text">Beverages</p>
+                               {% else %}
+                               <p class="card-text">Herbs & spices</p>
+                               {% endif %}
+                                <a href="#" class="btn px-auto wish-list"><i class="bi bi-bookmark "></i></a>
+                                <a href="/pdetails/{{x.id}}" class="btn details px-auto"> view details </a><br />
+                                <a href="/addtocart/{{x.id}}" class="btn cart px-auto">ADD TO CART</a><br>
+                            </div>
+                        </div>
+                    </div> <!--product end-->
+                    {% endfor %}
+                    
+                    
+                </div>
+                
+            </div>
+        </div>
+
+    </div><!--main div end-->
+    <script>
+        let element= document.getElementById("icon");
+        console.log(element)
+        element.addEventListener('click',fun_icon);
+
+        function fun_icon(){
+            const a= document.getElementsByClassName('visible-category')[0];
+            if (a.hasAttribute('hidden')){
+                a.removeAttribute("hidden")
+            }
+            else{
+                a.setAttribute("hidden", true);
+            }
+
+        }
+    </script>
+
+{% endblock 'main' %}

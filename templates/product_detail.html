@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'main' %}
+
+<style>
+        .m-r{
+          margin-left: 190px;
+        }
+</style> 
+
+<!--main start-->
+<br><br>
+<div class="row mt-5">
+    {% for x in products %}
+    <div class="col-md-6 mx-6">
+        <img class='m-r' src="{{x.pimage.url}}" height="400px" />
+    </div>
+    <div class="col-md-6 m-con">
+        <p><strong>Product Name: </strong>{{x.name}}</p>
+        <p><strong>Price: &nbsp;</strong>Rs {{x.price}}</p>
+
+        {% if x.cat == 1 %}
+        <p class="card-text"><strong>category: </strong>Dairy</p>
+        {% elif x.cat == 2 %}
+        <p class="card-text"><strong>category: </strong>Fruits</p>
+        {% elif x.cat == 3 %}
+        <p class="card-text"><strong>category: </strong>Vegetables</p>
+        {% elif x.cat == 4 %}
+        <p class="card-text"><strong>category: </strong>Pasta, rice & cereals</p>
+        {% elif x.cat == 5 %}
+        <p class="card-text"><strong>category: </strong>Meat alternatives</p>
+        {% elif x.cat == 6 %}
+        <p class="card-text"><strong>category: </strong>Cans & jars</p>
+        {% elif x.cat == 7 %}
+        <p class="card-text"><strong>category: </strong>Bread & baked goods</p>
+        {% elif x.cat == 8 %}
+        <p class="card-text"><strong>category: </strong>Frozen foods</p>
+        {% elif x.cat == 9 %}
+        <p class="card-text"><strong>category: </strong>Sauces & condiments</p>
+        {% elif x.cat == 10 %}
+        <p class="card-text"><strong>category: </strong>Nuts & snacks</p>
+        {% elif x.cat == 11 %}
+        <p class="card-text"><strong>category: </strong>Beverages</p>
+        {% else %}
+        <p class="card-text"><strong>category: </strong>Herbs & spices</p>
+        {% endif %}  
+        
+        <p><strong>Product Description: </strong>{{x.pdetails}}</p>
+        <a href="/addtocart/{{x.id}}"><button class="btn btn-dark">Add to cart</button></a>&nbsp;&nbsp;
+        <a href="/viewcart"><button class="btn btn-dark">view cart</button></a>&nbsp;&nbsp;
+        <input type=button class="btn btn-dark" value="shop More" onClick="javascript:history.go(-1);">
+         
+        {% comment %} print successfully added {% endcomment %}
+        {% if success %}
+        <div class='alert alert-success'>{{success}}</div>
+        {% endif %}
+        
+        {% comment %} print product already exist {% endcomment %}
+        {% if msg %}
+        <div class='alert alert-danger'>{{msg}}</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div><!--row end-->
+
+        
+<!--main end-->
+{% endblock 'main' %}

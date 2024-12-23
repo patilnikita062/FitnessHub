@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'main' %}
+<!--main start-->
+<br>
+<div class="row mt-5">
+    <div class="col-md">
+        <div class='place-box'>
+        <img width='100px' src="{% static "asset/images/placed.png" %}" alt="img"><br><br>
+        <h1><strong>Order Placed Successfully!</strong></h1>
+        <h6>We've sent you an email with the Order details.</h6>
+        </div>
+    </div>
+</div>
+    
+
+<!--main end-->
+{% endblock 'main' %}

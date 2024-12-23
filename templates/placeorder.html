@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'main' %}
+
+<!--main start-->
+<br>
+<div class="row mt-5">
+    <div class="col-md-9">
+        {% for x in data %}
+        {% if forloop.counter == 1 %}
+        <h5 class="bg-secondary text-white p-2">Customer details</h5>
+        <p><strong>Name: </strong>{{x.uid.username}}</p>
+        <p><strong>Mobile: </strong>1010101010</p>
+        <p><strong>Email: </strong>{{x.uid.email}}</p>
+        {% endif %}
+        {% endfor %}
+        <h5 class="bg-secondary text-white p-2">Product details</h5>
+        {% for  x in data %}
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <img src="{{x.pid.pimage.url}}" alt="product1" width="100%">
+            </div>
+            <div class="col-md-8">
+                <p><strong>Product Name: </strong>{{x.pid.name}}</p>
+                <p><strong>Price: </strong>Rs.{{x.pid.price}}</p>
+                {% if x.pid.cat == 1 %}
+                  <p class="card-text"><strong>category: </strong>Dairy</p>
+                {% elif x.pid.cat == 2 %}
+                  <p class="card-text"><strong>category: </strong>Fruits</p>
+                {% elif x.pid.cat == 3 %}
+                  <p class="card-text"><strong>category: </strong>Vegetables</p>
+                {% elif x.pid.cat == 4 %}
+                  <p class="card-text"><strong>category: </strong>Pasta, rice & cereals</p>
+                {% elif x.pid.cat == 5 %}
+                  <p class="card-text"><strong>category: </strong>Meat alternatives</p>
+                {% elif x.pid.cat == 6 %}
+                  <p class="card-text"><strong>category: </strong>Cans & jars</p>
+                {% elif x.pid.cat == 7 %}
+                  <p class="card-text"><strong>category: </strong>Bread & baked goods</p>
+                {% elif x.pid.cat == 8 %}
+                  <p class="card-text"><strong>category: </strong>Frozen foods</p>
+                {% elif x.pid.cat == 9 %}
+                  <p class="card-text"><strong>category: </strong>Sauces & condiments</p>
+                {% elif x.pid.cat == 10 %}
+                  <p class="card-text"><strong>category: </strong>Nuts & snacks</p>
+                {% elif x.pid.cat == 11 %}
+                  <p class="card-text"><strong>category: </strong>Beverages</p>
+                {% else %}
+                  <p class="card-text"><strong>category: </strong>Herbs & spices</p>
+                {% endif %}
+                <p><strong>Product Description: &nbsp; &nbsp;</strong>{{x.pid.pdetail}}</p>
+                <p>
+                    <strong>QTY:</strong>
+                    <a href="/updateqtyorder/0/{{x.id}}"><button class= 'btn btn-warning'>-</button></a>
+                    <input type="number" value={{x.qty}}>
+                    <a href="/updateqtyorder/1/{{x.id}}"><button class= 'btn btn-info'>+</button></a>
+                </p>
+                <br>
+                
+                <a href="/removeorder/{{x.id}}"><button class="btn btn-dark anchor">Remove</button></a>
+
+            </div>
+
+        </div><!--img and product detail end-->
+        {% endfor %}
+
+
+    </div><!--customer and product detail end-->
+
+    <div class="col-md-3">
+        <h5 class="bg-secondary text-white p-2">Total Amount</h5>
+        <p><strong>Total({{n}} items):</strong>Rs.{{total}}</p>
+        <hr>
+        <p><strong>Total Amount:</strong> Rs.{{total}}</p>
+        <a href="/makepayment"><button class="btn btn-dark">Make Payment</button></a>
+
+    </div><!--total amount end-->
+
+</div><!--main row end-->
+        
+<!--main end-->
+{% endblock 'main' %}
